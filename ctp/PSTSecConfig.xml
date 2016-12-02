@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pstsec-config>
+  <password-required>true</password-required>
+  <remote-authentication>
+    <enabled>true</enabled>
+    <host>localhost</host>
+    <port>8080</port>
+  </remote-authentication>
+  
+</pstsec-config>

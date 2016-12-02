@@ -17,7 +17,7 @@ ENV CTP_NOTIFY true
 
 ENV LICENSE_EDITION custom_edition
 ENV LICENSE_FEATURES "Service Enabled, Performance, Extension Pack, Validate, Message Packs, Unlimited Hits\/Day, 1 Million Hits\/Day, 500000 Hits\/Day, 100000 Hits\/Day, 50000 Hits\/Day, 25000 Hits\/Day, 10000 Hits\/Day"
-ENV LICENSE_SERVER_HOST snake.parasoft.com
+ENV LICENSE_SERVER_HOST localhost
 ENV LICENSE_SERVER_PORT 2002
 
 RUN set -x \
