@@ -3,10 +3,10 @@ FROM datarepository
 ENV SOAVIRT_HOME /usr/local/parasoft/soavirt
 ENV PATH $SOAVIRT_HOME:$PATH
 RUN mkdir -p "$SOAVIRT_HOME"
-COPY parasoft_soavirt_server_9.10.war $SOAVIRT_HOME
+COPY parasoft_soavirt_server_9.10.1.zip $SOAVIRT_HOME
 WORKDIR $SOAVIRT_HOME
 
-ENV CATALINA_OPTS "-Xmx2g -Xms2g"
+ENV CATALINA_OPTS "-Xms768M -Xmx768M -server -XX:+UseConcMarkSweepGC -XX:+UseParNewGC"
 
 ENV VIRTUALIZE_SERVER_NAME Docker
 ENV CTP_HOST localhost
@@ -21,8 +21,13 @@ ENV LICENSE_SERVER_HOST localhost
 ENV LICENSE_SERVER_PORT 2002
 
 RUN set -x \
-	&& $JAVA_HOME/bin/jar -xf parasoft_soavirt_server_9.10.war \
-	&& rm parasoft_soavirt_server_9.10.war \
+	&& yum install -y unzip \
+	&& unzip parasoft_soavirt_server_9.10.1.zip \
+	&& rm parasoft_soavirt_server_9.10.1.zip \
+	&& yum clean all \
+	&& yum -y remove unzip \
+	&& $JAVA_HOME/bin/jar -xf soavirt.war \
+	&& rm soavirt.war \
 	&& mkdir -p $CATALINA_HOME/soavirt \
 	&& mkdir -p $CATALINA_HOME/soavirt/conf/Catalina/localhost \
 	&& mkdir $CATALINA_HOME/soavirt/logs \
@@ -57,6 +62,6 @@ COPY startSOAVirtServer.sh .
 
 RUN chmod +x startSOAVirtServer.sh
 
-EXPOSE 9080
+EXPOSE 9080 9443
 
 CMD ["startSOAVirtServer.sh"]
