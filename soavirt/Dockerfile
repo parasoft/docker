@@ -3,7 +3,7 @@ FROM datarepository
 ENV SOAVIRT_HOME /usr/local/parasoft/soavirt
 ENV PATH $SOAVIRT_HOME:$PATH
 RUN mkdir -p "$SOAVIRT_HOME"
-COPY parasoft_soavirt_server_9.10.1.zip $SOAVIRT_HOME
+COPY parasoft_soavirt_server_9.10.2.zip $SOAVIRT_HOME
 WORKDIR $SOAVIRT_HOME
 
 ENV CATALINA_OPTS "-Xms768M -Xmx768M -server -XX:+UseConcMarkSweepGC -XX:+UseParNewGC"
@@ -22,8 +22,8 @@ ENV LICENSE_SERVER_PORT 2002
 
 RUN set -x \
 	&& yum install -y unzip \
-	&& unzip parasoft_soavirt_server_9.10.1.zip \
-	&& rm parasoft_soavirt_server_9.10.1.zip \
+	&& unzip parasoft_soavirt_server_9.10.2.zip \
+	&& rm parasoft_soavirt_server_9.10.2.zip \
 	&& yum clean all \
 	&& yum -y remove unzip \
 	&& $JAVA_HOME/bin/jar -xf soavirt.war \
