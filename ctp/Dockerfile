@@ -3,7 +3,7 @@ FROM soavirt
 ENV CTP_HOME /usr/local/parasoft/ctp
 ENV PATH $CTP_HOME:$PATH
 RUN mkdir -p "$CTP_HOME"
-COPY parasoft_continuous_testing_platform_3.0.2.zip $CTP_HOME
+COPY parasoft_continuous_testing_platform_3.1.0.zip $CTP_HOME
 COPY database.properties $CTP_HOME
 COPY license $CTP_HOME
 COPY PSTSecConfig.xml $CTP_HOME
@@ -15,8 +15,8 @@ ENV LICENSE_SERVER_PORT 2002
 
 RUN set -x \
 	&& yum install -y unzip \
-	&& unzip parasoft_continuous_testing_platform_3.0.2.zip \
-	&& rm parasoft_continuous_testing_platform_3.0.2.zip \
+	&& unzip parasoft_continuous_testing_platform_3.1.0.zip \
+	&& rm parasoft_continuous_testing_platform_3.1.0.zip \
 	&& mkdir -p $CATALINA_HOME/ctp \
 	&& mkdir -p $CATALINA_HOME/ctp/conf/Catalina/localhost \
 	&& mkdir $CATALINA_HOME/ctp/logs \
