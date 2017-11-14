@@ -3,7 +3,7 @@ FROM datarepository
 ENV SOAVIRT_HOME /usr/local/parasoft/soavirt
 ENV PATH $SOAVIRT_HOME:$PATH
 RUN mkdir -p "$SOAVIRT_HOME"
-COPY parasoft_soavirt_server_9.10.2.zip $SOAVIRT_HOME
+COPY parasoft_soavirt_server_9.10.3.zip $SOAVIRT_HOME
 WORKDIR $SOAVIRT_HOME
 
 ENV CATALINA_OPTS "-Xms768M -Xmx768M -server -XX:+UseConcMarkSweepGC -XX:+UseParNewGC"
@@ -22,8 +22,8 @@ ENV LICENSE_SERVER_PORT 2002
 
 RUN set -x \
 	&& yum install -y unzip \
-	&& unzip parasoft_soavirt_server_9.10.2.zip \
-	&& rm parasoft_soavirt_server_9.10.2.zip \
+	&& unzip parasoft_soavirt_server_9.10.3.zip \
+	&& rm parasoft_soavirt_server_9.10.3.zip \
 	&& yum clean all \
 	&& yum -y remove unzip \
 	&& $JAVA_HOME/bin/jar -xf soavirt.war \
@@ -55,8 +55,10 @@ RUN set -x \
 	&& sed -i 's/^#virtualize.license.use_network=.*/virtualize.license.use_network=true/' $SOAVIRT_HOME/WEB-INF/config.properties \
 	&& sed -i 's/^#virtualize.license.network.edition=.*/virtualize.license.network.edition=$LICENSE_EDITION/' $SOAVIRT_HOME/WEB-INF/config.properties \
 	&& sed -i 's/^#virtualize.license.custom_edition_features=.*/virtualize.license.custom_edition_features=$LICENSE_FEATURES/' $SOAVIRT_HOME/WEB-INF/config.properties \
-	&& sed -i 's/^#license.network.host=.*/license.network.host=$LICENSE_SERVER_HOST/' $SOAVIRT_HOME/WEB-INF/config.properties \
-	&& sed -i 's/^#license.network.port=.*/license.network.port=$LICENSE_SERVER_PORT/' $SOAVIRT_HOME/WEB-INF/config.properties
+	&& sed -i 's/^#license.network.host=.*//' $SOAVIRT_HOME/WEB-INF/config.properties \
+	&& sed -i 's/^#license.network.port=.*//' $SOAVIRT_HOME/WEB-INF/config.properties \
+	&& echo 'license.network.host=$LICENSE_SERVER_HOST' >> $SOAVIRT_HOME/WEB-INF/config.properties \
+	&& echo 'license.network.port=$LICENSE_SERVER_PORT' >> $SOAVIRT_HOME/WEB-INF/config.properties
 
 COPY startSOAVirtServer.sh .
 
