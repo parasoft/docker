@@ -1,14 +1,14 @@
 FROM centos:latest
 
-ENV JRE_VERSION 8u162
-ENV JRE_FOLDER jdk1.8.0_162
-ENV JRE_CHECKSUM f7a82395f752cb57691f7c6a9b3b22a0
+ENV JRE_VERSION 8u172
+ENV JRE_FOLDER jdk1.8.0_172
+ENV JRE_CHECKSUM 1e4cdd3c3e8c524c02f52981b6ddfc0e
 ENV JAVA_HOME /usr/java/latest
 
 # Download and install the required version of Oracle's server JRE
 RUN set -x \
 	&& yum install -y wget \
-	&& wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/$JRE_VERSION-b12/0da788060d494f5095bf8624735fa2f1/server-jre-$JRE_VERSION-linux-x64.tar.gz" \
+	&& wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/$JRE_VERSION-b11/a58eab1ec242421181065cdc37240b08/server-jre-$JRE_VERSION-linux-x64.tar.gz" \
 	&& echo "$JRE_CHECKSUM  server-jre-$JRE_VERSION-linux-x64.tar.gz" >> MD5SUM \
 	&& md5sum -c MD5SUM \
 	&& mkdir -p /usr/java \
