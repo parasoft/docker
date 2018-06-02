@@ -1,12 +1,14 @@
 FROM server-jre8
 
+ARG TOMCAT_MAJOR=8
+ARG TOMCAT_VERSION=8.5.31
+ARG TOMCAT_URL=http://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR}/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz
 ENV CATALINA_HOME /usr/local/tomcat
-ENV PATH $CATALINA_HOME/bin:$PATH
-RUN mkdir -p "$CATALINA_HOME"
-WORKDIR $CATALINA_HOME
+ENV PATH ${CATALINA_HOME}/bin:${PATH}
+WORKDIR ${CATALINA_HOME}
 
 # see https://www.apache.org/dist/tomcat/tomcat-8/KEYS
-RUN gpg --keyserver pool.sks-keyservers.net --recv-keys \
+RUN gpg --keyserver hkp://pool.sks-keyservers.net:80 --recv-keys \
 	05AB33110949707C93A279E3D3EFE6B686867BA6 \
 	07E48665A34DCAFAE522E5E6266191C37C037D42 \
 	47309207D818FFD8DCD3F83F1931D684307A10A5 \
@@ -21,16 +23,12 @@ RUN gpg --keyserver pool.sks-keyservers.net --recv-keys \
 	F7DA48BB64BCB84ECBA7EE6935CD23C10D498E23 \
 	713DA88BE50911535FE716F5208B0AB1D63011C7
 
-ENV TOMCAT_MAJOR 8
-ENV TOMCAT_VERSION 8.5.31
-ENV TOMCAT_TGZ_URL http://archive.apache.org/dist/tomcat/tomcat-$TOMCAT_MAJOR/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz
-
 RUN set -x \
-	&& curl -fSL "$TOMCAT_TGZ_URL" -o tomcat.tar.gz \
-	&& curl -fSL "$TOMCAT_TGZ_URL.asc" -o tomcat.tar.gz.asc \
+	&& curl -fSL "${TOMCAT_URL}" -o tomcat.tar.gz \
+	&& curl -fSL "${TOMCAT_URL}.asc" -o tomcat.tar.gz.asc \
 	&& gpg --verify tomcat.tar.gz.asc \
 	&& tar -xvf tomcat.tar.gz --strip-components=1 \
 	&& rm bin/*.bat \
 	&& rm tomcat.tar.gz*
 
-CMD ["catalina.sh", "run"]
+CMD [ "catalina.sh", "run" ]

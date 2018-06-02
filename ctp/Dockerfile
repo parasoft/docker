@@ -1,47 +1,43 @@
 FROM soavirt
 
+ARG CTP_URL=https://www1.parasoft.com/downloads/virtualize/parasoft_continuous_testing_platform_3.1.1.zip
 ENV CTP_HOME /usr/local/parasoft/ctp
-ENV PATH $CTP_HOME:$PATH
-RUN mkdir -p "$CTP_HOME"
-COPY parasoft_continuous_testing_platform_3.1.0.zip $CTP_HOME
-COPY database.properties $CTP_HOME
-COPY license $CTP_HOME
-COPY PSTSecConfig.xml $CTP_HOME
-WORKDIR $CTP_HOME
+ENV PATH ${CTP_HOME}:${PATH}
+WORKDIR ${CTP_HOME}
+
+COPY . ./
 
 ENV CATALINA_OPTS "-Xms768M -Xmx768M -server -XX:+UseConcMarkSweepGC -XX:+UseParNewGC"
 ENV LICENSE_SERVER_HOST localhost
 ENV LICENSE_SERVER_PORT 2002
 
 RUN set -x \
+	&& curl -OfSL "${CTP_URL}" --retry 999 --retry-max-time 0 -C -\
+	&& curl -OfSL "${CTP_URL}.md5" \
+	&& CTP_FILE=`basename ${CTP_URL}` \
+	&& md5sum -c ${CTP_FILE}.md5 \
 	&& yum install -y unzip \
-	&& unzip parasoft_continuous_testing_platform_3.1.0.zip \
-	&& rm parasoft_continuous_testing_platform_3.1.0.zip \
-	&& mkdir -p $CATALINA_HOME/ctp \
-	&& mkdir -p $CATALINA_HOME/ctp/conf/Catalina/localhost \
-	&& mkdir $CATALINA_HOME/ctp/logs \
-	&& mkdir $CATALINA_HOME/ctp/temp \
-	&& mkdir $CATALINA_HOME/ctp/webapps \
-	&& mkdir $CATALINA_HOME/ctp/work \
-	&& cp $CATALINA_HOME/conf/logging.properties $CATALINA_HOME/ctp/conf/ \
-	&& cp $CATALINA_HOME/conf/server.xml $CATALINA_HOME/ctp/conf/ \
-	&& cp $CATALINA_HOME/conf/web.xml $CATALINA_HOME/ctp/conf/ \
-	&& cp -r $CATALINA_HOME/webapps/* $CATALINA_HOME/ctp/webapps/ \
-	&& mv licenseserver.war $CATALINA_HOME/ctp/webapps/ \
-	&& mv pstsec.war $CATALINA_HOME/ctp/webapps/ \
-	&& mkdir $CATALINA_HOME/ctp/webapps/em/ \
-	&& unzip em.war -d $CATALINA_HOME/ctp/webapps/em/ \
-	&& mv database.properties $CATALINA_HOME/ctp/webapps/em/WEB-INF/classes/META-INF/spring/ \
-	&& mv license $CATALINA_HOME/ctp/webapps/em/ \
-	&& mv PSTSecConfig.xml $CATALINA_HOME/ctp/webapps/em/config/ \
-	&& echo "<% response.sendRedirect(\"/em\"); %>" >> $CATALINA_HOME/ctp/webapps/ROOT/index.jsp \
-	&& yum clean all \
-	&& yum -y remove unzip
-
-COPY startCTP.sh .
-
-RUN chmod +x startCTP.sh
+	&& unzip ${CTP_FILE} \
+	&& rm ${CTP_FILE}* \
+	&& mkdir -p ${CATALINA_HOME}/ctp/conf/Catalina/localhost \
+	&& mkdir -p ${CATALINA_HOME}/ctp/webapps/em/ \
+	&& mkdir ${CATALINA_HOME}/ctp/logs \
+	&& mkdir ${CATALINA_HOME}/ctp/temp \
+	&& mkdir ${CATALINA_HOME}/ctp/work \
+	&& cp ${CATALINA_HOME}/conf/logging.properties ${CATALINA_HOME}/ctp/conf/ \
+	&& cp ${CATALINA_HOME}/conf/server.xml ${CATALINA_HOME}/ctp/conf/ \
+	&& cp ${CATALINA_HOME}/conf/web.xml ${CATALINA_HOME}/ctp/conf/ \
+	&& cp -r ${CATALINA_HOME}/webapps/* ${CATALINA_HOME}/ctp/webapps/ \
+	&& mv licenseserver.war ${CATALINA_HOME}/ctp/webapps/ \
+	&& mv pstsec.war ${CATALINA_HOME}/ctp/webapps/ \
+	&& unzip em.war -d ${CATALINA_HOME}/ctp/webapps/em/ \
+	&& mv database.properties ${CATALINA_HOME}/ctp/webapps/em/WEB-INF/classes/META-INF/spring/ \
+	&& mv license ${CATALINA_HOME}/ctp/webapps/em/ \
+	&& mv PSTSecConfig.xml ${CATALINA_HOME}/ctp/webapps/em/config/ \
+	&& echo "<% response.sendRedirect(\"/em\"); %>" >> ${CATALINA_HOME}/ctp/webapps/ROOT/index.jsp \
+	&& yum -y remove unzip \
+	&& yum clean all
 
 EXPOSE 8080 2002
 
-CMD ["startCTP.sh"]
+CMD [ "startCTP.sh" ]
