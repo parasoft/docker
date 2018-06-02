@@ -11,6 +11,7 @@ then
 	sed -i "s/\$CTP_NOTIFY/$CTP_NOTIFY/g" $SOAVIRT_HOME/WEB-INF/config.properties
 	sed -i "s/\$LICENSE_EDITION/$LICENSE_EDITION/g" $SOAVIRT_HOME/WEB-INF/config.properties
 	sed -i "s/\$LICENSE_FEATURES/$LICENSE_FEATURES/g" $SOAVIRT_HOME/WEB-INF/config.properties
+	sed -i "s/\$SOATEST_LICENSE_FEATURES/$SOATEST_LICENSE_FEATURES/g" $SOAVIRT_HOME/WEB-INF/config.properties
 	sed -i "s/\$LICENSE_SERVER_HOST/$LICENSE_SERVER_HOST/g" $SOAVIRT_HOME/WEB-INF/config.properties
 	sed -i "s/\$LICENSE_SERVER_PORT/$LICENSE_SERVER_PORT/g" $SOAVIRT_HOME/WEB-INF/config.properties
 	sed -i "s/\$LICENSE_SERVER_HOST/$LICENSE_SERVER_HOST/g" $CATALINA_HOME/ctp/webapps/em/license

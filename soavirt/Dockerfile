@@ -1,6 +1,6 @@
 FROM datarepository
 
-ARG SOAVIRT_URL=https://www1.parasoft.com/downloads/virtualize/parasoft_soavirt_server_9.10.4.zip
+ARG SOAVIRT_URL=https://www1.parasoft.com/downloads/virtualize/parasoft_soavirt_server_9.10.5.zip
 ENV SOAVIRT_HOME /usr/local/parasoft/soavirt
 ENV PATH ${SOAVIRT_HOME}:${PATH}
 WORKDIR ${SOAVIRT_HOME}
@@ -16,6 +16,7 @@ ENV CTP_NOTIFY true
 
 ENV LICENSE_EDITION custom_edition
 ENV LICENSE_FEATURES "Service Enabled, Performance, Extension Pack, Validate, Message Packs, Unlimited Hits\/Day, 1 Million Hits\/Day, 500000 Hits\/Day, 100000 Hits\/Day, 50000 Hits\/Day, 25000 Hits\/Day, 10000 Hits\/Day"
+ENV SOATEST_LICENSE_FEATURES "RuleWizard, Command Line, SOA, Web, Server API Enabled, Jtest Connect, Stub Desktop, Stub Server, Message Packs, Advanced Test Generation 100 Users, Advanced Test Generation 25 Users, Advanced Test Generation 5 Users, Advanced Test Generation Desktop"
 ENV LICENSE_SERVER_HOST localhost
 ENV LICENSE_SERVER_PORT 2002
 
@@ -54,6 +55,9 @@ RUN set -x \
 	&& sed -i 's/^#env.manager.username=.*/env.manager.username=$CTP_USERNAME/' ${SOAVIRT_HOME}/WEB-INF/config.properties \
 	&& sed -i 's/^#env.manager.password=.*/env.manager.password=$CTP_PASSWORD/' ${SOAVIRT_HOME}/WEB-INF/config.properties \
 	&& sed -i 's/^#env.manager.notify=.*/env.manager.notify=$CTP_NOTIFY/' ${SOAVIRT_HOME}/WEB-INF/config.properties \
+	&& sed -i 's/^#soatest.license.use_network=.*/soatest.license.use_network=true/' $SOAVIRT_HOME/WEB-INF/config.properties \
+	&& sed -i 's/^#soatest.license.network.edition=.*/soatest.license.network.edition=$LICENSE_EDITION/' $SOAVIRT_HOME/WEB-INF/config.properties \
+	&& sed -i 's/^#soatest.license.custom_edition_features=.*/soatest.license.custom_edition_features=$SOATEST_LICENSE_FEATURES/' $SOAVIRT_HOME/WEB-INF/config.properties \
 	&& sed -i 's/^#virtualize.license.use_network=.*/virtualize.license.use_network=true/' ${SOAVIRT_HOME}/WEB-INF/config.properties \
 	&& sed -i 's/^#virtualize.license.network.edition=.*/virtualize.license.network.edition=$LICENSE_EDITION/' ${SOAVIRT_HOME}/WEB-INF/config.properties \
 	&& sed -i 's/^#virtualize.license.custom_edition_features=.*/virtualize.license.custom_edition_features=$LICENSE_FEATURES/' ${SOAVIRT_HOME}/WEB-INF/config.properties \
