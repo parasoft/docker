@@ -1,6 +1,6 @@
 FROM datarepository
 
-ARG SOAVIRT_URL=https://www1.parasoft.com/downloads/virtualize/parasoft_soavirt_server_9.10.5.zip
+ARG SOAVIRT_URL=https://www1.parasoft.com/downloads/virtualize/parasoft_soavirt_server_9.10.6.zip
 ENV SOAVIRT_HOME /usr/local/parasoft/soavirt
 ENV PATH ${SOAVIRT_HOME}:${PATH}
 WORKDIR ${SOAVIRT_HOME}

@@ -1,6 +1,6 @@
 FROM soavirt
 
-ARG CTP_URL=https://www1.parasoft.com/downloads/virtualize/parasoft_continuous_testing_platform_3.1.1.zip
+ARG CTP_URL=https://www1.parasoft.com/downloads/virtualize/parasoft_continuous_testing_platform_3.1.2.zip
 ENV CTP_HOME /usr/local/parasoft/ctp
 ENV PATH ${CTP_HOME}:${PATH}
 WORKDIR ${CTP_HOME}
