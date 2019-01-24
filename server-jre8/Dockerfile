@@ -1,9 +1,9 @@
 FROM centos:latest
 
-ARG JRE_VERSION=8u192
-ARG JRE_FOLDER=jdk1.8.0_192
-ARG JRE_URL=http://download.oracle.com/otn-pub/java/jdk/${JRE_VERSION}-b12/750e1c8617c5452694857ad95c3ee230/server-jre-${JRE_VERSION}-linux-x64.tar.gz
-ARG JRE_CHECKSUM=a98edc8e31c260e990a445cbb4ceba3d
+ARG JRE_VERSION=8u201
+ARG JRE_FOLDER=jdk1.8.0_201
+ARG JRE_URL=https://download.oracle.com/otn-pub/java/jdk/${JRE_VERSION}-b09/42970487e3af4f5aa5bca3f542482c60/server-jre-${JRE_VERSION}-linux-x64.tar.gz
+ARG JRE_CHECKSUM=bf6aadf1bc2cb0f6f4848b60ce253ac3
 ENV JAVA_HOME /usr/java/latest
 WORKDIR /usr/java
 
