@@ -8,6 +8,8 @@ WORKDIR ${SOAVIRT_HOME}
 ENV CATALINA_OPTS "-Xms768M -Xmx768M -server -XX:+UseConcMarkSweepGC -XX:+UseParNewGC"
 
 ENV VIRTUALIZE_SERVER_NAME Docker
+ENV VIRTUALIZE_SERVER_PORT 9080
+ENV VIRTUALIZE_SERVER_SECURE_PORT 9443
 ENV CTP_HOST localhost
 ENV CTP_PORT 8080
 ENV CTP_USERNAME admin
@@ -42,11 +44,11 @@ RUN set -x \
 	&& cp ${CATALINA_HOME}/conf/web.xml ${CATALINA_HOME}/soavirt/conf/ \
 	&& cp -r ${CATALINA_HOME}/webapps/* ${CATALINA_HOME}/soavirt/webapps/ \
 	&& echo "<Context docBase=\"${SOAVIRT_HOME}\" path=\"\" reloadable=\"true\" />" > ${CATALINA_HOME}/soavirt/conf/Catalina/localhost/ROOT.xml \
-	&& sed -i 's/8080/9080/g' ${SOAVIRT_HOME}/WEB-INF/config.properties \
-	&& sed -i 's/8443/9443/g' ${SOAVIRT_HOME}/WEB-INF/config.properties \
-	&& sed -i 's/8080/9080/g' ${CATALINA_HOME}/soavirt/conf/server.xml \
+	&& sed -i 's/8080/$VIRTUALIZE_SERVER_PORT/g' ${SOAVIRT_HOME}/WEB-INF/config.properties \
+	&& sed -i 's/8443/$VIRTUALIZE_SERVER_SECURE_PORT/g' ${SOAVIRT_HOME}/WEB-INF/config.properties \
 	&& sed -i 's/8005/9005/g' ${CATALINA_HOME}/soavirt/conf/server.xml \
-	&& sed -i 's/8443/9443/g' ${CATALINA_HOME}/soavirt/conf/server.xml \
+	&& sed -i "s/8080/${VIRTUALIZE_SERVER_PORT}/g" ${CATALINA_HOME}/soavirt/conf/server.xml \
+	&& sed -i "s/8443/${VIRTUALIZE_SERVER_SECURE_PORT}/g" ${CATALINA_HOME}/soavirt/conf/server.xml \
 	&& sed -i 's/8009/0/g' ${CATALINA_HOME}/soavirt/conf/server.xml
 
 RUN set -x \
@@ -68,6 +70,6 @@ RUN set -x \
 	&& yum -y remove unzip \
 	&& yum clean all
 
-EXPOSE 9080 9443
+EXPOSE ${VIRTUALIZE_SERVER_PORT} ${VIRTUALIZE_SERVER_SECURE_PORT}
 
 CMD [ "startSOAVirtServer.sh" ]
