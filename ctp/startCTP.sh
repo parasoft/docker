@@ -4,6 +4,8 @@
 if [ -f $SOAVIRT_HOME/WEB-INF/config.properties ]
 then
 	sed -i "s/\$VIRTUALIZE_SERVER_NAME/$VIRTUALIZE_SERVER_NAME/g" $SOAVIRT_HOME/WEB-INF/config.properties
+	sed -i "s/\$VIRTUALIZE_SERVER_PORT/$VIRTUALIZE_SERVER_PORT/g" $SOAVIRT_HOME/WEB-INF/config.properties
+	sed -i "s/\$VIRTUALIZE_SERVER_SECURE_PORT/$VIRTUALIZE_SERVER_SECURE_PORT/g" $SOAVIRT_HOME/WEB-INF/config.properties
 	sed -i "s/\$CTP_HOST/$CTP_HOST/g" $SOAVIRT_HOME/WEB-INF/config.properties
 	sed -i "s/\$CTP_PORT/$CTP_PORT/g" $SOAVIRT_HOME/WEB-INF/config.properties
 	sed -i "s/\$CTP_USERNAME/$CTP_USERNAME/g" $SOAVIRT_HOME/WEB-INF/config.properties
