@@ -1,18 +1,7 @@
-#Tue Nov 22 17:59:46 PST 2016
+#Thu Oct 31 09:27:12 PDT 2019
 ctp.license.use_network=true
-ctp.license_custom_edition_feature\ -\ CTP\ 100\ User\ Limit=true
-ctp.license_custom_edition_feature\ -\ CTP\ 25\ User\ Limit=true
-ctp.license_custom_edition_feature\ -\ CTP\ 250\ User\ Limit=true
-ctp.license_custom_edition_feature\ -\ CTP\ 5\ User\ Limit=true
-ctp.license_custom_edition_feature\ -\ CTP\ 50\ User\ Limit=true
-ctp.license_custom_edition_feature\ -\ CTP\ API\ Testing=true
-ctp.license_custom_edition_feature\ -\ CTP\ Environment\ Management=true
-ctp.license_custom_edition_feature\ -\ CTP\ Service\ Virtualization=true
-ctp.license_custom_edition_feature\ -\ CTP\ Data\ Management=true
-ctp.license_custom_edition_feature\ -\ CTP\ Data\ Modeling=true
-ctp.license_custom_edition_feature\ -\ CTP\ Unlimited\ Users=true
-ctp.license_enabled=true
-license.autoconf.timeout=20
+license.network.auth.enabled=$LICENSE_SERVER_AUTH_ENABLED
 license.network.host=$LICENSE_SERVER_HOST
+license.network.password=$LICENSE_SERVER_PASSWORD
 license.network.port=$LICENSE_SERVER_PORT
-license_start_deactivated=false
+license.network.user=$LICENSE_SERVER_USERNAME
