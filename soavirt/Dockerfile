@@ -76,6 +76,6 @@ RUN set -x \
 	&& yum -y remove unzip \
 	&& yum clean all
 
-EXPOSE ${VIRTUALIZE_SERVER_PORT} ${VIRTUALIZE_SERVER_SECURE_PORT}
+EXPOSE ${VIRTUALIZE_SERVER_PORT} ${VIRTUALIZE_SERVER_SECURE_PORT} 9617 9618
 
 CMD [ "startSOAVirtServer.sh" ]
