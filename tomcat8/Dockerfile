@@ -1,7 +1,7 @@
 FROM server-jre8
 
 ARG TOMCAT_MAJOR=8
-ARG TOMCAT_VERSION=8.5.54
+ARG TOMCAT_VERSION=8.5.59
 ARG TOMCAT_URL=http://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR}/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz
 ENV CATALINA_HOME /usr/local/tomcat
 ENV PATH ${CATALINA_HOME}/bin:${PATH}
