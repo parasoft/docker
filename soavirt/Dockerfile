@@ -57,7 +57,7 @@ RUN set -x \
 
 RUN set -x \
 	&& sed -i 's/^#env.manager.server.name=.*/env.manager.server.name=$VIRTUALIZE_SERVER_NAME/' ${SOAVIRT_HOME}/WEB-INF/config.properties \
-	&& sed -i 's/^#env.manager.server=.*/env.manager.server=http:\/\/$CTP_HOST:$CTP_PORT/' ${SOAVIRT_HOME}/WEB-INF/config.properties \
+	&& sed -i 's/^#env.manager.server=.*/env.manager.server=http\\\:\/\/$CTP_HOST\\\:$CTP_PORT/' ${SOAVIRT_HOME}/WEB-INF/config.properties \
 	&& sed -i 's/^#env.manager.username=.*/env.manager.username=$CTP_USERNAME/' ${SOAVIRT_HOME}/WEB-INF/config.properties \
 	&& sed -i 's/^#env.manager.password=.*/env.manager.password=$CTP_PASSWORD/' ${SOAVIRT_HOME}/WEB-INF/config.properties \
 	&& sed -i 's/^#env.manager.notify=.*/env.manager.notify=$CTP_NOTIFY/' ${SOAVIRT_HOME}/WEB-INF/config.properties \
