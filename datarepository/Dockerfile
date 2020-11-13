@@ -14,7 +14,7 @@ RUN set -x \
 	&& yum install -y unzip \
 	&& unzip ${DATA_REPOSITORY_FILE} \
 	&& rm ${DATA_REPOSITORY_FILE}* \
-	&& sed -i 's/^TDM=.*/TDM=http:\/\/$CTP_HOST:$CTP_PORT/' $DATA_REPOSITORY_HOME/server.sh \
+	&& sed -i 's/^TDA=.*/TDA=http:\/\/$CTP_HOST:$CTP_PORT/' $DATA_REPOSITORY_HOME/server.sh \
 	&& sed -i 's/^T_USER=.*/T_USER=$CTP_USERNAME/' $DATA_REPOSITORY_HOME/server.sh \
 	&& sed -i 's/^T_PASS=.*/T_PASS=$CTP_PASSWORD/' $DATA_REPOSITORY_HOME/server.sh \
 	&& yum -y remove unzip \
