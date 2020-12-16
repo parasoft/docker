@@ -19,12 +19,12 @@ then
 	sed -i "s/\$LICENSE_SERVER_AUTH_ENABLED/$LICENSE_SERVER_AUTH_ENABLED/g" $SOAVIRT_HOME/WEB-INF/config.properties
 	sed -i "s/\$LICENSE_SERVER_USERNAME/$LICENSE_SERVER_USERNAME/g" $SOAVIRT_HOME/WEB-INF/config.properties
 	sed -i "s/\$LICENSE_SERVER_PASSWORD/$LICENSE_SERVER_PASSWORD/g" $SOAVIRT_HOME/WEB-INF/config.properties
-	sed -i "s/\$LICENSE_SERVER_HOST/$LICENSE_SERVER_HOST/g" $CATALINA_HOME/ctp/webapps/em/license
-	sed -i "s/\$LICENSE_SERVER_PORT/$LICENSE_SERVER_PORT/g" $CATALINA_HOME/ctp/webapps/em/license
-	sed -i "s/\$LICENSE_SERVER_AUTH_ENABLED/$LICENSE_SERVER_AUTH_ENABLED/g" $CATALINA_HOME/ctp/webapps/em/license
-	sed -i "s/\$LICENSE_SERVER_USERNAME/$LICENSE_SERVER_USERNAME/g" $CATALINA_HOME/ctp/webapps/em/license
-	sed -i "s/\$LICENSE_SERVER_PASSWORD/$LICENSE_SERVER_PASSWORD/g" $CATALINA_HOME/ctp/webapps/em/license
 fi
+sed -i "s/\$LICENSE_SERVER_HOST/$LICENSE_SERVER_HOST/g" $CATALINA_HOME/ctp/webapps/em/license
+sed -i "s/\$LICENSE_SERVER_PORT/$LICENSE_SERVER_PORT/g" $CATALINA_HOME/ctp/webapps/em/license
+sed -i "s/\$LICENSE_SERVER_AUTH_ENABLED/$LICENSE_SERVER_AUTH_ENABLED/g" $CATALINA_HOME/ctp/webapps/em/license
+sed -i "s/\$LICENSE_SERVER_USERNAME/$LICENSE_SERVER_USERNAME/g" $CATALINA_HOME/ctp/webapps/em/license
+sed -i "s/\$LICENSE_SERVER_PASSWORD/$LICENSE_SERVER_PASSWORD/g" $CATALINA_HOME/ctp/webapps/em/license
 
 echo "Starting the Continuous Testing Platform..."
 mkdir -p $SOAVIRT_HOME/workspace/VirtualAssets/logs/ctp
