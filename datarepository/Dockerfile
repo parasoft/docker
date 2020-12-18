@@ -2,7 +2,7 @@ FROM tomcat8
 
 ARG DATA_REPOSITORY_URL=https://www1.parasoft.com/downloads/virtualize/parasoft_data_repository_server_3.0_linux_x86_64.zip
 ENV DATA_REPOSITORY_HOME /usr/local/parasoft/DataRepositoryServer-linux-x86_64
-ENV PATH ${DATA_REPOSITORY_HOME}/bin:${PATH}
+ENV PATH ${DATA_REPOSITORY_HOME}/bin:${DATA_REPOSITORY_HOME}:${PATH}
 WORKDIR ${DATA_REPOSITORY_HOME}
 
 RUN set -x \
