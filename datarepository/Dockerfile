@@ -22,4 +22,4 @@ RUN set -x \
 
 EXPOSE 2424
 
-CMD ["server.sh", "start"]
+CMD server.sh start ; sleep infinity
