@@ -1,6 +1,6 @@
 FROM soavirt
 
-ARG CTP_URL=https://www1.parasoft.com/downloads/virtualize/parasoft_continuous_testing_platform_2020.2.0.zip
+ARG CTP_URL=https://www1.parasoft.com/downloads/virtualize/parasoft_continuous_testing_platform_2021.1.0.zip
 ENV CTP_HOME /usr/local/parasoft/ctp
 ENV PATH ${CTP_HOME}:${PATH}
 WORKDIR ${CTP_HOME}
@@ -32,7 +32,6 @@ RUN set -x \
 	&& cp ${CATALINA_HOME}/conf/tomcat-users.xml ${CATALINA_HOME}/ctp/conf/ \
 	&& cp ${CATALINA_HOME}/conf/web.xml ${CATALINA_HOME}/ctp/conf/ \
 	&& cp -r ${CATALINA_HOME}/webapps/* ${CATALINA_HOME}/ctp/webapps/ \
-	&& mv licenseserver.war ${CATALINA_HOME}/ctp/webapps/ \
 	&& mv pstsec.war ${CATALINA_HOME}/ctp/webapps/ \
 	&& unzip em.war -d ${CATALINA_HOME}/ctp/webapps/em/ \
 	&& mv database.properties ${CATALINA_HOME}/ctp/webapps/em/WEB-INF/classes/META-INF/spring/ \
