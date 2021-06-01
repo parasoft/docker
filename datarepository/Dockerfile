@@ -8,9 +8,7 @@ WORKDIR ${DATA_REPOSITORY_HOME}
 RUN set -x \
 	&& cd .. \
 	&& curl -OfSL "${DATA_REPOSITORY_URL}" --retry 999 --retry-max-time 0 -C -\
-	&& curl -OfSL "${DATA_REPOSITORY_URL}.md5" \
 	&& DATA_REPOSITORY_FILE=`basename ${DATA_REPOSITORY_URL}` \
-	&& md5sum -c ${DATA_REPOSITORY_FILE}.md5 \
 	&& yum install -y unzip \
 	&& unzip ${DATA_REPOSITORY_FILE} \
 	&& rm ${DATA_REPOSITORY_FILE}* \

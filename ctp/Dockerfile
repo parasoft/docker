@@ -16,9 +16,7 @@ ENV LICENSE_SERVER_PASSWORD admin
 
 RUN set -x \
 	&& curl -OfSL "${CTP_URL}" --retry 999 --retry-max-time 0 -C -\
-	&& curl -OfSL "${CTP_URL}.md5" \
 	&& CTP_FILE=`basename ${CTP_URL}` \
-	&& md5sum -c ${CTP_FILE}.md5 \
 	&& yum install -y unzip \
 	&& unzip ${CTP_FILE} \
 	&& rm ${CTP_FILE}* \

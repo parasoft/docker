@@ -29,9 +29,7 @@ COPY startSOAVirtServer.sh .
 
 RUN set -x \
 	&& curl -OfSL "${SOAVIRT_URL}" --retry 999 --retry-max-time 0 -C -\
-	&& curl -OfSL "${SOAVIRT_URL}.md5" \
 	&& SOAVIRT_FILE=`basename ${SOAVIRT_URL}` \
-	&& md5sum -c ${SOAVIRT_FILE}.md5 \
 	&& yum install -y unzip \
 	&& unzip ${SOAVIRT_FILE} \
 	&& unzip soavirt.war \
